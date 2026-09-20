@@ -17,7 +17,7 @@ The workflow:
 5. Creates a new KB page when no match exists.
 6. Preserves the relation to the source task.
 
-This repository contains the exported workflow, assessment documentation, evidence screenshots, API examples, diagrams, and implementation notes.
+This repository contains the exported workflow, assessment documentation, evidence index, API examples, diagrams, and implementation notes.
 
 > **Security:** No Notion integration token, password, webhook secret, or other credential is stored in this repository.
 
@@ -142,7 +142,7 @@ Loom: https://www.loom.com/share/307f15da00f34f7687b6beb9bf913f1b
 
 ## Notion
 
-Project Tasks / Knowledge Base workspace evidence is documented in `docs/evidence/`.
+Project Tasks / Knowledge Base evidence is mapped in `docs/evidence/evidence-index.md`.
 
 ## Implementation Notes
 
