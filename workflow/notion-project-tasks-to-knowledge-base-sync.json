@@ -1,0 +1,379 @@
+{
+  "name": "Notion Project Tasks to Knowledge Base Sync",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "dataSourceId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "4a6c25b2-88d5-4647-8ceb-c1d80daefac8",
+          "cachedResultName": "Project Tasks"
+        }
+      },
+      "id": "297783d6-5f27-4805-b02d-7cd0f5211e67",
+      "name": "Task Created",
+      "type": "n8n-nodes-base.notionTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "credentials": {
+        "notionApi": {
+          "id": "8bJhs6ZNaDC7OT8M",
+          "name": "Notion account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "task-id",
+              "name": "taskId",
+              "type": "string",
+              "value": "={{ $json.id }}"
+            },
+            {
+              "id": "task-name",
+              "name": "taskName",
+              "type": "string",
+              "value": "={{ $json['Task Name'] }}"
+            },
+            {
+              "id": "priority",
+              "name": "priority",
+              "type": "string",
+              "value": "={{ $json['Priority'] }}"
+            },
+            {
+              "id": "status",
+              "name": "status",
+              "type": "string",
+              "value": "={{ $json['Status'] }}"
+            },
+            {
+              "id": "due-date",
+              "name": "dueDate",
+              "type": "string",
+              "value": "={{ $json['Due Date'] ? ($json['Due Date'].start || $json['Due Date']) : '' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "acf2a4a5-4a1a-45ff-b6c0-3b5b98fdd7b5",
+      "name": "Extract Task Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "dataSourceId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "d817402a-9e6d-4b84-a2cb-da7f116dd437",
+          "cachedResultName": "Knowledge Base"
+        },
+        "limit": 1,
+        "filterType": "manual",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "key": "Original Task|relation",
+              "type": "relation",
+              "condition": "contains",
+              "relationValue": "={{ $json.taskId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "155cb724-9117-4c84-9b97-802a0fbb7c74",
+      "name": "Find in Knowledge Base",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 3,
+      "position": [
+        448,
+        96
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "notionApi": {
+          "id": "8bJhs6ZNaDC7OT8M",
+          "name": "Notion account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "exists",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a2b35b91-c86d-4a2e-bc5e-d443e6001652",
+      "name": "KB Page Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $json.id }}"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Title|title",
+              "type": "title",
+              "title": "={{ $(\"Extract Task Data\").item.json.taskName }}"
+            },
+            {
+              "key": "Priority|select",
+              "type": "select",
+              "selectValue": "={{ $(\"Extract Task Data\").item.json.priority }}"
+            },
+            {
+              "key": "Status|select",
+              "type": "select",
+              "selectValue": "={{ $(\"Extract Task Data\").item.json.status }}"
+            },
+            {
+              "key": "Due Date|date",
+              "type": "date",
+              "includeTime": false,
+              "date": "={{ $(\"Extract Task Data\").item.json.dueDate }}"
+            },
+            {
+              "key": "Original Task|relation",
+              "type": "relation",
+              "relationValue": [
+                "={{ $(\"Extract Task Data\").item.json.taskId }}"
+              ]
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2901ebff-192d-4caa-8ae3-371194575715",
+      "name": "Update Knowledge Base Page",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 3,
+      "position": [
+        896,
+        0
+      ],
+      "credentials": {
+        "notionApi": {
+          "id": "8bJhs6ZNaDC7OT8M",
+          "name": "Notion account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "dataSourceId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "d817402a-9e6d-4b84-a2cb-da7f116dd437",
+          "cachedResultName": "Knowledge Base"
+        },
+        "title": "={{ $(\"Extract Task Data\").item.json.taskName }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Priority|select",
+              "type": "select",
+              "selectValue": "={{ $(\"Extract Task Data\").item.json.priority }}"
+            },
+            {
+              "key": "Status|select",
+              "type": "select",
+              "selectValue": "={{ $(\"Extract Task Data\").item.json.status }}"
+            },
+            {
+              "key": "Due Date|date",
+              "type": "date",
+              "includeTime": false,
+              "date": "={{ $(\"Extract Task Data\").item.json.dueDate }}"
+            },
+            {
+              "key": "Original Task|relation",
+              "type": "relation",
+              "relationValue": [
+                "={{ $(\"Extract Task Data\").item.json.taskId }}"
+              ]
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6462e986-9b3a-49e0-b55c-ce71b6b870b5",
+      "name": "Create Knowledge Base Page",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 3,
+      "position": [
+        896,
+        192
+      ],
+      "credentials": {
+        "notionApi": {
+          "id": "8bJhs6ZNaDC7OT8M",
+          "name": "Notion account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "event": "pagedUpdatedInDatabase",
+        "dataSourceId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "4a6c25b2-88d5-4647-8ceb-c1d80daefac8",
+          "cachedResultName": "Project Tasks"
+        }
+      },
+      "id": "23473a35-ac67-4866-b944-fe0b636d0175",
+      "name": "Task Updated",
+      "type": "n8n-nodes-base.notionTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        192
+      ],
+      "credentials": {
+        "notionApi": {
+          "id": "8bJhs6ZNaDC7OT8M",
+          "name": "Notion account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Task Created": {
+      "main": [
+        [
+          {
+            "node": "Extract Task Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Task Data": {
+      "main": [
+        [
+          {
+            "node": "Find in Knowledge Base",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find in Knowledge Base": {
+      "main": [
+        [
+          {
+            "node": "KB Page Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KB Page Exists?": {
+      "main": [
+        [
+          {
+            "node": "Update Knowledge Base Page",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Knowledge Base Page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Task Updated": {
+      "main": [
+        [
+          {
+            "node": "Extract Task Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "f853c2f3-1f09-44d7-813a-f4362d7941be",
+  "meta": {
+    "instanceId": "6abe9931809978352319cb21622ffdff38accce530bfc6c488633e9f18461d78"
+  },
+  "nodeGroups": [],
+  "id": "x03tqqKtKIyrQ9lR",
+  "tags": []
+}
