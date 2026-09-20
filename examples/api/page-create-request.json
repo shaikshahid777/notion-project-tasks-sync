@@ -1,0 +1,37 @@
+{
+  "parent": {
+    "database_id": "<PROJECT_TASKS_DATABASE_ID>"
+  },
+  "properties": {
+    "Task Name": {
+      "title": [
+        {
+          "text": {
+            "content": "Build Webhook Automation"
+          }
+        }
+      ]
+    },
+    "Priority": {
+      "select": {
+        "name": "High"
+      }
+    },
+    "Status": {
+      "select": {
+        "name": "In Progress"
+      }
+    },
+    "Tags": {
+      "multi_select": [
+        {"name": "API"},
+        {"name": "Automation"}
+      ]
+    },
+    "Due Date": {
+      "date": {
+        "start": "<CURRENT_DATE>"
+      }
+    }
+  }
+}
