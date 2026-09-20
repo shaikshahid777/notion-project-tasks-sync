@@ -1,0 +1,18 @@
+{
+  "filter": {
+    "and": [
+      {
+        "property": "Priority",
+        "select": {
+          "equals": "High"
+        }
+      },
+      {
+        "property": "Tags",
+        "multi_select": {
+          "contains": "API"
+        }
+      }
+    ]
+  }
+}
