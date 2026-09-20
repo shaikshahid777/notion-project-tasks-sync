@@ -14,6 +14,35 @@ The automation detects task creation and updates, extracts structured task data,
 
 ![Architecture](docs/diagrams/architecture.svg)
 
+<p align="center">
+  <a href="https://www.loom.com/share/307f15da00f34f7687b6beb9bf913f1b">
+    <img src="https://img.shields.io/badge/▶%20WATCH%20DEMO-Loom-625df5?style=for-the-badge" alt="Watch Demo">
+  </a>
+  <a href="https://mohammad-shaheed.app.n8n.cloud/assistant/2a6a757f-6b4e-4c2a-9cfd-c3e2644e3a9d">
+    <img src="https://img.shields.io/badge/⚡%20OPEN%20WORKFLOW-n8n-ea4b71?style=for-the-badge" alt="Open n8n Workflow">
+  </a>
+  <a href="https://app.notion.com/developers/connections/3e07b079-dc53-814d-bcc9-0027985469ef?spaceId=6467b079-dc53-81ea-936c-0003c77a18fe">
+    <img src="https://img.shields.io/badge/▣%20NOTION%20INTEGRATION-Notion-111111?style=for-the-badge" alt="Notion Integration">
+  </a>
+</p>
+
+<p align="center">
+  <a href="docs/diagrams/architecture.svg">
+    <img src="https://img.shields.io/badge/🏗%20ARCHITECTURE-Diagram-6366f1?style=for-the-badge" alt="Architecture">
+  </a>
+  <a href="docs/assessment/assessment-mapping.md">
+    <img src="https://img.shields.io/badge/✓%20ASSESSMENT-Matrix-16a34a?style=for-the-badge" alt="Assessment Matrix">
+  </a>
+  <a href="workflow/notion-project-tasks-to-knowledge-base-sync.json">
+    <img src="https://img.shields.io/badge/{}%20WORKFLOW-JSON-f59e0b?style=for-the-badge" alt="Workflow JSON">
+  </a>
+  <a href="docs/evidence/evidence-index.md">
+    <img src="https://img.shields.io/badge/▣%20EVIDENCE-Screenshots-0ea5e9?style=for-the-badge" alt="Evidence">
+  </a>
+</p>
+
+
+
 ---
 
 ## 🎯 Problem
@@ -259,14 +288,7 @@ notion-project-tasks-sync/
 
 ## 🎥 Demonstration
 
-**Loom video**  
-https://www.loom.com/share/307f15da00f34f7687b6beb9bf913f1b
-
-**Live n8n workflow workspace**  
-https://mohammad-shaheed.app.n8n.cloud/assistant/2a6a757f-6b4e-4c2a-9cfd-c3e2644e3a9d
-
-**Notion integration**  
-https://app.notion.com/developers/connections/3e07b079-dc53-814d-bcc9-0027985469ef?spaceId=6467b079-dc53-81ea-936c-0003c77a18fe
+Use the buttons at the top of this README to open the live demo, n8n workflow, and Notion integration directly.
 
 ---
 
