@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560">
+<defs><style>.b{fill:#fff;stroke:#334155;stroke-width:2}.t{font:600 20px Arial;fill:#0f172a}.s{font:15px Arial;fill:#475569}.a{stroke:#6366f1;stroke-width:3;fill:none;marker-end:url(#m)}</style><marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#6366f1"/></marker></defs>
+<rect width="1200" height="560" fill="#f8fafc"/>
+<text x="600" y="42" text-anchor="middle" class="t">Notion Project Tasks → Knowledge Base Sync</text>
+<rect x="60" y="100" width="220" height="110" rx="14" class="b"/><text x="170" y="140" text-anchor="middle" class="t">Project Tasks</text><text x="170" y="170" text-anchor="middle" class="s">Source database</text>
+<rect x="360" y="100" width="220" height="110" rx="14" class="b"/><text x="470" y="140" text-anchor="middle" class="t">n8n Triggers</text><text x="470" y="170" text-anchor="middle" class="s">Created / Updated</text>
+<rect x="660" y="100" width="220" height="110" rx="14" class="b"/><text x="770" y="140" text-anchor="middle" class="t">Extract Task Data</text><text x="770" y="170" text-anchor="middle" class="s">Normalize fields</text>
+<rect x="960" y="100" width="180" height="110" rx="14" class="b"/><text x="1050" y="140" text-anchor="middle" class="t">KB Lookup</text><text x="1050" y="170" text-anchor="middle" class="s">Relation match</text>
+<path d="M280 155 H360" class="a"/><path d="M580 155 H660" class="a"/><path d="M880 155 H960" class="a"/>
+<rect x="330" y="330" width="240" height="110" rx="14" class="b"/><text x="450" y="370" text-anchor="middle" class="t">Update Page</text><text x="450" y="400" text-anchor="middle" class="s">Existing relation</text>
+<rect x="630" y="330" width="240" height="110" rx="14" class="b"/><text x="750" y="370" text-anchor="middle" class="t">Create Page</text><text x="750" y="400" text-anchor="middle" class="s">No relation found</text>
+<rect x="930" y="330" width="210" height="110" rx="14" class="b"/><text x="1035" y="370" text-anchor="middle" class="t">Knowledge Base</text><text x="1035" y="400" text-anchor="middle" class="s">Synchronized record</text>
+<path d="M1050 210 V270 H450 V330" class="a"/><path d="M1050 210 V270 H750 V330" class="a"/><path d="M570 385 H930" class="a"/><path d="M870 385 H930" class="a"/>
+</svg>
